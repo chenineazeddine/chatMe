@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "366861060363",
+    "firebase_url": "https://chatme-30a53.firebaseio.com",
+    "project_id": "chatme-30a53",
+    "storage_bucket": "chatme-30a53.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:366861060363:android:2a35768ec8bc084d",
+        "android_client_info": {
+          "package_name": "udacity.project.summer.chatme"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "366861060363-vfdmu83cun5vmam2t3cjmcqoua05h7f9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "udacity.project.summer.chatme",
+            "certificate_hash": "503eebbf19cba139c0e0266bd0c45f89b74ed4c6"
+          }
+        },
+        {
+          "client_id": "366861060363-pm30qrt29om9ollp40qlm01rvvns8akb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAxpoGxOa8rD7kacygqIOnCkKAS7zKm8j8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "366861060363-pm30qrt29om9ollp40qlm01rvvns8akb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

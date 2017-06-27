@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorPrimary">#9C27B0</color>
+    <color name="colorPrimaryDark">#6A1B9A</color>
+    <color name="colorAccent">#EC407A</color>
+
+    <!-- costume color -->
+        <!-- regular opacity colors -->
+    <color name="white_smoke">#FAFAFA</color>
+        <!-- low opacity colors -->
+    <color name="colorPrimary_opacity_1">#509C27B0</color>
+    <color name="colorPrimary_opacity_2">#109C27B0</color>
 </resources>
