@@ -1,5 +1,6 @@
 package udacity.project.summer.chatme;
 
+import android.app.ProgressDialog;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
@@ -12,15 +13,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class AuthFragment extends Fragment {
     private static final String TAG = "AuthFragment";
-    private Button mGetStartedButton ;
+    private Button mSignInButton ;
+    private Button mRegisterButton ;
     private TextInputLayout mEmailInputLayout ;
     private TextInputLayout mPasswordInputLayout  ;
     private EditText mEmailEditText ;
     private EditText mPasswordEditText;
+    private TextView mGamilAuthText;
     private View mView ;
     public AuthFragment() {
     }
@@ -35,15 +39,17 @@ public class AuthFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mGetStartedButton = (Button) view.findViewById(R.id.get_started_button);
+        mSignInButton = (Button) view.findViewById(R.id.sign_in_button);
+        mRegisterButton = (Button) view.findViewById(R.id.register_button);
         mEmailInputLayout = (TextInputLayout) view.findViewById(R.id.email_edit_text_layout);
         mPasswordInputLayout = (TextInputLayout) view.findViewById(R.id.password_edit_text_layout);
         mEmailEditText = (EditText) view.findViewById(R.id.email_edit_text);
         mPasswordEditText = (EditText) view.findViewById(R.id.password_edit_text);
+        mGamilAuthText = (TextView) view.findViewById(R.id.gmail_auth_text);
 
 
 
-        mGetStartedButton.setOnClickListener(new View.OnClickListener() {
+        mSignInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String password = mPasswordEditText.getText().toString();
@@ -54,7 +60,7 @@ public class AuthFragment extends Fragment {
 
                 if(validEmail && validPassword) {
                     if(getContext() instanceof LauncherActivity){
-                        ((LauncherActivity)getContext()).handleLogIn(email,password);
+                        ((LauncherActivity)getContext()).handleSignIn(email,password);
                     }
                 }else{
                     Toast.makeText(getContext(), "fail", Toast.LENGTH_SHORT).show();
@@ -66,6 +72,34 @@ public class AuthFragment extends Fragment {
 
             }
         });
+
+        mRegisterButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String password = mPasswordEditText.getText().toString();
+                String email = mEmailEditText.getText().toString();
+                boolean validEmail = isValidEmail(email);
+                boolean validPassword = isValidPassword(password);
+
+
+                if(validEmail && validPassword) {
+                        ((LauncherActivity)getContext()).handleSignUp(email,password);
+                }else{
+                    mEmailInputLayout.setError(getContext().getResources().getString(R.string.email_error_mess));
+                    mPasswordInputLayout.setError(getContext().getResources().getString(R.string.password_error_mess));
+                }
+                mEmailInputLayout.setErrorEnabled(validEmail);
+                mPasswordInputLayout.setErrorEnabled(validPassword);
+            }
+        });
+
+        mGamilAuthText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((LauncherActivity)getContext()).handleGmailAuth();
+            }
+        });
+
     }
     private boolean isValidEmail(String email){
        return  Patterns.EMAIL_ADDRESS.matcher(email).matches();

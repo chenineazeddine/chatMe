@@ -2,8 +2,17 @@
     <string name="app_name" translatable="false">Chat Me</string>
     <string name="email_hint_text">email</string>
     <string name="password_hint_text">password</string>
-    <string name="get_started_button_text">get started</string>
+    <string name="sign_in_text">sign in</string>
+    <string name="sign_in_progress_mess">sign in you in</string>
+    <string name="register_text">register</string>
+    <string name="register_progress_mess">creating your account</string>
     <string name="app_slogan">meet the world</string>
     <string name="email_error_mess">non valid email</string>
     <string name="password_error_mess">non valid password</string>
+    <string name="gmail_auth_text">continue with</string>
+    <string name="gmail" translatable="false">Gmail</string>
+    <string name="auth_failed">Authentication failed</string>
+
+    <!--&lt;!&ndash;google auth client ID &ndash;&gt;-->
+    <!--<string name="default_web_client_id">644952395796-kpvnaq9b872hqpr8q8iuc9f9kbr5f1ai.apps.googleusercontent.com</string>-->
 </resources>
