@@ -6,8 +6,10 @@
 
     <!-- costume color -->
         <!-- regular opacity colors -->
+    <color name="white">#FFFFFF</color>
     <color name="white_smoke">#FAFAFA</color>
         <!-- low opacity colors -->
     <color name="colorPrimary_opacity_1">#509C27B0</color>
     <color name="colorPrimary_opacity_2">#109C27B0</color>
+
 </resources>

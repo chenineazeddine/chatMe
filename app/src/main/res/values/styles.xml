@@ -11,6 +11,10 @@
     <!-- splash activity theme -->
     <style name="splashActivityTheme" parent="Theme.AppCompat.Light.NoActionBar">
 
+
+    </style>
+    <style name="TextAppearance.App.TextInputLayout" parent="@android:style/TextAppearance">
+    <item name="android:textColor">@color/colorAccent</item>
     </style>
 
 </resources>

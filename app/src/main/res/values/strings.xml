@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name" translatable="false">Chat Me</string>
+    <string name="email_hint_text">email</string>
+    <string name="password_hint_text">password</string>
+    <string name="get_started_button_text">get started</string>
+    <string name="app_slogan">meet the world</string>
+    <string name="email_error_mess">non valid email</string>
+    <string name="password_error_mess">non valid password</string>
 </resources>
