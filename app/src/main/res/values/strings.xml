@@ -13,6 +13,9 @@
     <string name="gmail" translatable="false">Gmail</string>
     <string name="auth_failed">Authentication failed</string>
 
-    <!--&lt;!&ndash;google auth client ID &ndash;&gt;-->
-    <!--<string name="default_web_client_id">644952395796-kpvnaq9b872hqpr8q8iuc9f9kbr5f1ai.apps.googleusercontent.com</string>-->
+   <!--facebook auth-->
+    <string name="facebook_app_id">459045137790111</string>
+    <string name="fb_login_protocol_scheme">fb459045137790111</string>
+
+
 </resources>
