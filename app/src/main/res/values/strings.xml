@@ -9,11 +9,22 @@
     <string name="app_slogan">meet the world</string>
     <string name="email_error_mess">non valid email</string>
     <string name="password_error_mess">non valid password</string>
+    <string name="username_error_mess">non valid username</string>
     <string name="gmail_auth_text">continue with</string>
     <string name="gmail" translatable="false">Gmail</string>
     <string name="auth_failed">Authentication failed</string>
+    <string name="choice">or</string>
+    <string name="username_hint">username</string>
+    <string name="get_started">get started</string>
+    <string name="default_chat_language_text">default chat language:</string>
+    <string name="new_profile_image_dialog_title">new profile picture</string>
 
-   <!--facebook auth-->
+    <array name="import_image_dialog_items">
+        <item>import from gallery</item>
+        <item>take a photo</item>
+    </array>
+
+    <!--facebook auth-->
     <string name="facebook_app_id">459045137790111</string>
     <string name="fb_login_protocol_scheme">fb459045137790111</string>
 
