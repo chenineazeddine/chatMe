@@ -1,4 +1,4 @@
-package udacity.project.summer.chatme;
+package meduim.project.summer.chatme;
 
 import android.content.Intent;
 import android.database.Cursor;
@@ -27,7 +27,7 @@ import com.google.firebase.storage.UploadTask;
 import java.io.FileNotFoundException;
 
 
-import udacity.project.summer.chatme.firebaseUtils.FirebaseUtils;
+import meduim.project.summer.chatme.firebaseUtils.FirebaseUtils;
 
 public class initProfileActivity extends AppCompatActivity implements ImportImageDialogFragment.ImportOnClickListener {
 

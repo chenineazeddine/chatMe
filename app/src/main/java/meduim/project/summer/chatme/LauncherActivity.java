@@ -1,4 +1,4 @@
-package udacity.project.summer.chatme;
+package meduim.project.summer.chatme;
 
 
 import android.content.Intent;
@@ -25,7 +25,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FacebookAuthProvider;
 
 
-import udacity.project.summer.chatme.firebaseUtils.FirebaseUtils;
+import meduim.project.summer.chatme.firebaseUtils.FirebaseUtils;
 
 /**
  * Created by azeddine on 29/06/17.

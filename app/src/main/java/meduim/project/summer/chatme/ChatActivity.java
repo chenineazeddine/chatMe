@@ -1,4 +1,4 @@
-package udacity.project.summer.chatme;
+package meduim.project.summer.chatme;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;

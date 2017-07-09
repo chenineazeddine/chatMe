@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="udacity.project.summer.chatme">
+    package="meduim.project.summer.chatme">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -17,7 +17,7 @@
             android:value="@string/facebook_app_id" />
 
         <activity
-            android:name=".LauncherActivity"
+            android:name="meduim.project.summer.chatme.LauncherActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -44,9 +44,9 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".initProfileActivity"
+            android:name="meduim.project.summer.chatme.initProfileActivity"
             android:theme="@style/AppTheme" />
-        <activity android:name=".ChatActivity"></activity>
+        <activity android:name="meduim.project.summer.chatme.ChatActivity"></activity>
     </application>
 
 </manifest>

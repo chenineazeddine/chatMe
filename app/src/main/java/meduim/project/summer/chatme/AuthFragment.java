@@ -1,4 +1,4 @@
-package udacity.project.summer.chatme;
+package meduim.project.summer.chatme;
 
 import android.content.Intent;
 import android.support.annotation.Nullable;

@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:background="@color/white"
     android:layout_height="match_parent"
-    tools:context="udacity.project.summer.chatme.initProfileActivity">
+    tools:context="meduim.project.summer.chatme.initProfileActivity">
     <FrameLayout
         android:id="@+id/background_container"
         android:layout_width="match_parent"
