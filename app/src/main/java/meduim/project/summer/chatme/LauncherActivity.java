@@ -58,40 +58,40 @@ public class LauncherActivity extends AppCompatActivity implements Animation.Ani
             @Override
             public void run() {
                 if(FirebaseUtils.isAuth()){
-
+                    startChatActivity();
                 }else {
-                    Toast.makeText(LauncherActivity.this, "the user is not auth", Toast.LENGTH_SHORT).show();
-                }
-                AuthFragment authFragment = new AuthFragment();
+                    AuthFragment authFragment = new AuthFragment();
 
-                if(Build.VERSION.SDK_INT>= Build.VERSION_CODES.LOLLIPOP){
+                    if(Build.VERSION.SDK_INT>= Build.VERSION_CODES.LOLLIPOP){
+                        /**
+                         activity or fragment entry transition and shared elements
+                         is available only on API 21 and higher
+                         **/
+
+                        Slide slide = new Slide(Gravity.BOTTOM);
+                        slide.setDuration(350);
+                        slide.setInterpolator(AnimationUtils.loadInterpolator(
+                                getBaseContext(),
+                                android.R.interpolator.linear_out_slow_in
+                        ));
+                        authFragment.setEnterTransition(slide);
+
+                        /**
+                         * inflating the shared element transition from the resource folder
+                         * **/
+                        authFragment.setSharedElementEnterTransition(TransitionInflater.from(getBaseContext()).inflateTransition(R.transition.move));
+                    }
                     /**
-                     activity or fragment entry transition and shared elements
-                     is available only on API 21 and higher
-                     **/
-
-                    Slide slide = new Slide(Gravity.BOTTOM);
-                    slide.setDuration(350);
-                    slide.setInterpolator(AnimationUtils.loadInterpolator(
-                            getBaseContext(),
-                            android.R.interpolator.linear_out_slow_in
-                    ));
-                    authFragment.setEnterTransition(slide);
-
-                    /**
-                     * inflating the shared element transition from the resource folder
-                     * **/
-                    authFragment.setSharedElementEnterTransition(TransitionInflater.from(getBaseContext()).inflateTransition(R.transition.move));
+                     * starting the auth fragment calling the support fragment Manger,
+                     *  with specifying the views that we want to be shared
+                     *  **/
+                    getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.fragment_container,authFragment)
+                            .addSharedElement(findViewById(R.id.chat_me_logo),getResources().getString(R.string.app_name))
+                            .commit();
                 }
-                /**
-                 * starting the auth fragment calling the support fragment Manger,
-                 *  with specifying the views that we want to be shared
-                 *  **/
-                getSupportFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.fragment_container,authFragment)
-                        .addSharedElement(findViewById(R.id.chat_me_logo),getResources().getString(R.string.app_name))
-                        .commit();
+
             }
         },
                 750);
@@ -102,7 +102,15 @@ public class LauncherActivity extends AppCompatActivity implements Animation.Ani
     public void onAnimationRepeat(Animation animation) {
 
     }
-
+    /**
+     * a method used to start the chat activity
+     */
+    private void startChatActivity(){
+        Intent intent =new Intent(LauncherActivity.this,ChatActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+        finish();
+    }
     /**
      * a public method to handel the user sign in event from the auth fragment
      *
@@ -117,11 +125,7 @@ public class LauncherActivity extends AppCompatActivity implements Animation.Ani
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()){
-                            Intent intent =new Intent(LauncherActivity.this,ChatActivity.class);
-                            // removing the launcher activity from the back the stack
-                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                            startActivity(intent);
-                            finish();
+                            startChatActivity();
                         }else{
                             // displaying an error message toast
                             Toast.makeText(LauncherActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
@@ -175,10 +179,7 @@ public class LauncherActivity extends AppCompatActivity implements Animation.Ani
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             Log.d(TAG, "signInWithCredential: success");
-                            Intent intent =new Intent(LauncherActivity.this,ChatActivity.class);
-                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                            startActivity(intent);
-                            finish();
+                            startChatActivity()
                         } else {
                             Toast.makeText(LauncherActivity.this, task.getException().getMessage(),
                                     Toast.LENGTH_SHORT).show();
