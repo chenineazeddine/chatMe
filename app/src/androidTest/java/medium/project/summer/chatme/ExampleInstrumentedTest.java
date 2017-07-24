@@ -1,4 +1,4 @@
-package meduim.project.summer.chatme;
+package medium.project.summer.chatme;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

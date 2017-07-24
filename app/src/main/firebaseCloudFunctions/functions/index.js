@@ -14,6 +14,7 @@ exports.createUserAccount = functions.auth.user().onCreate(event => {
     const photoURL = event.data.photoURL || "";
     var username = event.data.displayName;
 
+
     /**
      * if the username is null we user the fist part of the user email
      * as the the default username 

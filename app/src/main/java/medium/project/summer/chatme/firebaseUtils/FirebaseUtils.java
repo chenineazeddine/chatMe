@@ -1,4 +1,4 @@
-package meduim.project.summer.chatme.firebaseUtils;
+package medium.project.summer.chatme.firebaseUtils;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;

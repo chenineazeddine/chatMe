@@ -1,4 +1,4 @@
-package meduim.project.summer.chatme;
+package medium.project.summer.chatme;
 
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;

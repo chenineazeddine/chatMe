@@ -1,9 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="meduim.project.summer.chatme.ChatActivity">
+    android:orientation="vertical"
+    tools:context="medium.project.summer.chatme.ChatActivity">
 
-</android.support.constraint.ConstraintLayout>
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="@color/colorPrimary"
+        android:elevation="2dp"
+        app:paddingStart="8dp">
+
+        <ImageView
+            android:id="@+id/user_avatar"
+            android:layout_width="40dp"
+            android:background="@drawable/avatar"
+            android:layout_height="40dp" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/username_text"
+            style="@style/TextAppearance.AppCompat.Body2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+    </android.support.v7.widget.Toolbar>
+
+    <com.stfalcon.chatkit.messages.MessagesList
+        android:id="@+id/messages_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/input"
+        android:layout_weight="1" />
+
+    <com.stfalcon.chatkit.messages.MessageInput
+        android:id="@+id/message_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        app:inputBackground="@drawable/message_input_background"
+        app:inputButtonDefaultBgColor="@color/white_smoke"
+        app:inputButtonDefaultBgPressedColor="@color/white_smoke"
+        app:inputButtonDefaultIconColor="@color/colorAccent"
+        app:inputButtonDefaultIconPressedColor="@color/colorAccent" />
+
+
+</LinearLayout>

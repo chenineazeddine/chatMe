@@ -1,4 +1,4 @@
-package meduim.project.summer.chatme;
+package medium.project.summer.chatme;
 
 
 import android.content.Intent;
@@ -25,7 +25,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FacebookAuthProvider;
 
 
-import meduim.project.summer.chatme.firebaseUtils.FirebaseUtils;
+import medium.project.summer.chatme.firebaseUtils.FirebaseUtils;
 
 /**
  * Created by azeddine on 29/06/17.
@@ -179,7 +179,7 @@ public class LauncherActivity extends AppCompatActivity implements Animation.Ani
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             Log.d(TAG, "signInWithCredential: success");
-                            startChatActivity()
+                            startChatActivity();
                         } else {
                             Toast.makeText(LauncherActivity.this, task.getException().getMessage(),
                                     Toast.LENGTH_SHORT).show();

@@ -14,6 +14,7 @@
     <string name="gmail" translatable="false">Gmail</string>
     <string name="auth_failed">Authentication failed</string>
     <string name="choice">or</string>
+    <string name="sign_out">sign out</string>
     <string name="username_hint">username</string>
     <string name="get_started">get started</string>
     <string name="default_chat_language_text">default chat language:</string>

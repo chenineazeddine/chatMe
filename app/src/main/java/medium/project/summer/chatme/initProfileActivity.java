@@ -1,6 +1,8 @@
-package meduim.project.summer.chatme;
+package medium.project.summer.chatme;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.MediaStore;
@@ -27,20 +29,22 @@ import com.google.firebase.storage.UploadTask;
 import java.io.FileNotFoundException;
 
 
-import meduim.project.summer.chatme.firebaseUtils.FirebaseUtils;
+import medium.project.summer.chatme.firebaseUtils.FirebaseUtils;
 
 public class initProfileActivity extends AppCompatActivity implements ImportImageDialogFragment.ImportOnClickListener {
 
     private static final String TAG = "initProfileActivity";
     public static final int REQUEST_IMAGE_CAPTURE = 1;
     public static final int REQUEST_IMAGE_FROM_GALLERY = 0;
+    public static final String USERNAME ="USERNAME";
+    public static final String PHOTO_URL ="PHOTO_URL";
 
     private FirebaseUser mFirebaseUser ;
-
+    private String mProfileImageUrl;
+    private String mDefaultUsernameText;
     private TextInputLayout mUsernameLayout;
     private ImageView mProfileImage ;
     private EditText mUsernameEditText;
-    private Button mGetStartedButton;
 
 
 
@@ -55,25 +59,32 @@ public class initProfileActivity extends AppCompatActivity implements ImportImag
         mProfileImage = (ImageView) findViewById(R.id.profile_image);
         mUsernameEditText = (EditText) findViewById(R.id.username_edit_text);
         mUsernameLayout = (TextInputLayout) findViewById(R.id.username_edit_text_layout);
+        setDefaultUsernameText();
 
-        mGetStartedButton = (Button) findViewById(R.id.get_started_btn);
-        mGetStartedButton.setOnClickListener(
+        findViewById(R.id.get_started_btn).setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         String username = mUsernameEditText.getText().toString();
                         if(username.isEmpty()){
-                            mUsernameLayout.setErrorEnabled(true);
-                            mUsernameLayout.setError(getResources().getString(R.string.username_error_mess));
+                                mUsernameLayout.setErrorEnabled(true);
+                                mUsernameLayout.setError(getResources().getString(R.string.username_error_mess));
                         }else{
                             // update the user's username in the firebase real time database
-                            FirebaseUtils.getCurrentUserDbRef().child("username").setValue(username);
-                            // start chatting
-                            startActivity(new Intent(initProfileActivity.this,ChatActivity.class));
+                            if(mDefaultUsernameText.compareTo(username) != 0) FirebaseUtils.getCurrentUserDbRef().child("username").setValue(username);
+                                getPreferences(Context.MODE_PRIVATE)
+                                        .edit()
+                                        .putString(USERNAME,username)
+                                        .putString(PHOTO_URL,mProfileImageUrl)
+                                        .commit();
+                                FirebaseUtils.auth.getCurrentUser().sendEmailVerification();
+                                // start chatting
+                                startActivity(new Intent(initProfileActivity.this,ChatActivity.class));
                         }
                     }
                 }
         );
+
         // setting up the event listener for the ImageView long press event
         mProfileImage.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
@@ -87,20 +98,6 @@ public class initProfileActivity extends AppCompatActivity implements ImportImag
 
 
 
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        // getting a reference to the firebase authenticated user
-        mFirebaseUser = FirebaseUtils.auth.getCurrentUser();
-        if(mFirebaseUser != null){
-            // using Glide to display a rounded profile image
-            Glide.with(this)
-                    .load(R.drawable.avatar)
-                    .apply(new RequestOptions().circleCrop())
-                    .into(mProfileImage);
-        }
     }
 
     /**
@@ -127,7 +124,6 @@ public class initProfileActivity extends AppCompatActivity implements ImportImag
                 break;
         }
     }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         String imageLocalPath;
@@ -135,8 +131,7 @@ public class initProfileActivity extends AppCompatActivity implements ImportImag
         Log.d(TAG, "onActivityResult: ");
         if(resultCode == RESULT_OK){
             if(requestCode==REQUEST_IMAGE_CAPTURE ||  requestCode==REQUEST_IMAGE_FROM_GALLERY) {
-
-                // a code block to get path of the taken or imported image
+                // a code block to get the path of the taken or imported image
                 Uri pickedImage = data.getData();
                 String[] filePath = {MediaStore.Images.Media.DATA};
                 cursor  = getContentResolver().query(pickedImage, filePath, null, null, null);
@@ -145,7 +140,7 @@ public class initProfileActivity extends AppCompatActivity implements ImportImag
 
                 /**
                  *    using a try catch block since uploadProfileImage
-                 *    because throws FileNotFoundException
+                 *   throws FileNotFoundException
                   */
 
                 try {
@@ -159,11 +154,12 @@ public class initProfileActivity extends AppCompatActivity implements ImportImag
                                                 new ValueEventListener() {
                                                     @Override
                                                     public void onDataChange(DataSnapshot dataSnapshot) {
-                                                      String profileImageUrl  = (String) dataSnapshot.getValue();
+                                                      mProfileImageUrl  = (String) dataSnapshot.getValue();
                                                         Glide.with(initProfileActivity.this)
-                                                                .load(profileImageUrl)
+                                                                .load(mProfileImageUrl)
                                                                 .apply(new RequestOptions().circleCrop())
                                                                 .into(mProfileImage);
+                                                        mProfileImage.setBackground(null);
                                                     }
 
                                                     @Override
@@ -190,6 +186,20 @@ public class initProfileActivity extends AppCompatActivity implements ImportImag
         }
 
     }
+    private void setDefaultUsernameText(){
+        FirebaseUtils.getCurrentUserDbRef().child("username").addValueEventListener(
+                new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        mDefaultUsernameText = (String) dataSnapshot.getValue();
+                        mUsernameEditText.setText(mDefaultUsernameText);
+                    }
 
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
 
+                    }
+                }
+        );
+    }
 }
