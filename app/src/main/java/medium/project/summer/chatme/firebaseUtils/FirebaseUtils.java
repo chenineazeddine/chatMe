@@ -21,6 +21,7 @@ public class FirebaseUtils {
     public static final String PROFILE_PHOTO_FORMAT =".jpeg";
 
     public static final String DATABASE_USER_REF ="users/";
+    public static final String DATABASE_MESSAGES_REF ="messages/";
 
     public static  final FirebaseAuth auth = FirebaseAuth.getInstance();
     public static final FirebaseDatabase db = FirebaseDatabase.getInstance();
@@ -55,5 +56,8 @@ public class FirebaseUtils {
      */
     public static DatabaseReference getCurrentUserDbRef(){
         return  db.getReference(DATABASE_USER_REF).child(auth.getCurrentUser().getUid());
+    }
+    public static DatabaseReference getMessagesDbRef(){
+        return  db.getReference(DATABASE_MESSAGES_REF);
     }
 }
